@@ -40,9 +40,9 @@ class Account(object):
     @staticmethod
     def new(name, phone, email):
         # Generate a secret key that the client keeps to refer to the account.
-        rand_bytes = filter(lambda x: x < 128, os.urandom(1000))
+        rand_bytes = os.urandom(1000)
         h = hashlib.sha512()
-        h.update(str(rand_bytes))
+        h.update(rand_bytes)
         h.update(email)
         h.update(name)
         h.update(phone)

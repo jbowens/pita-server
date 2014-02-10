@@ -1,5 +1,5 @@
 import psycopg2
-from flask import Flask, g
+from flask import Flask, g, jsonify
 
 app = Flask(__name__)
 

@@ -6,5 +6,6 @@ CREATE TABLE IF NOT EXISTS accounts (
     aid         serial primary key,
     name        varchar(40) not null, 
     phone       integer,
-    email       varchar(100)
+    email       varchar(100),
+    key         text
 );

@@ -6,3 +6,4 @@
 --
 CREATE ROLE pita LOGIN;
 CREATE DATABASE mylittlepita OWNER pita;
+GRANT ALL PRIVILEGES ON DATABASE mylittlepita TO pita;

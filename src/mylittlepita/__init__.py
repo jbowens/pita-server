@@ -26,6 +26,9 @@ def show_frontend():
     get_db()
     return 'This API is for Pitas only.' 
 
+from accounts import accounts
+app.register_blueprint(accounts, url_prefix='/accounts')
+
 # Spawn the server
 if __name__ == '__main__':
     app.run()

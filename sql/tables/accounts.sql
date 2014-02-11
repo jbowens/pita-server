@@ -7,5 +7,7 @@ CREATE TABLE IF NOT EXISTS accounts (
     name        varchar(40) not null, 
     phone       bigint,
     email       varchar(100),
-    key         text
+    key         text,
+    created     timestamp default now(),
+    last_seen   timestamp default now()
 );

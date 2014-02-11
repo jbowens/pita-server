@@ -35,7 +35,8 @@ def get_db():
     if not hasattr(g, 'dbconn'):
         db_conn_str = 'dbname=%s user=%s' % (app.config['DATABASE_NAME'],
                                              app.config['DATABASE_USER'])
-        g.dbconn = psycopg2.connect(db_conn_str);
+        g.dbconn = psycopg2.connect(db_conn_str)
+        g.dbconn.autocommit = True
     return g.dbconn
 
 @app.route('/')

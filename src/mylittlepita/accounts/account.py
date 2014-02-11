@@ -60,5 +60,6 @@ class Account(object):
         cur = get_db().cursor()
         cur.execute('SELECT aid FROM accounts WHERE aid = %s AND key %s',
                     (aid, key))
-        return Account(cur.fetchone()) if cur.rowcount > 0 else None
+        acc = Account(cur.fetchone()) if cur.rowcount > 0 else None
+        return acc
 

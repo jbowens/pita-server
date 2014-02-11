@@ -4,6 +4,14 @@ My Little PITA Server
 The server for My Little PITA. This server does not provide
 any frontend for the website.
 
+### Authentication
+
+Some endpoints require account authentication. For these endpoints, the server expects two
+custom headers to be sent with the request.
+
+- `X-PITA-ACCOUNT-ID` - the account id of the account to authenticate as
+- `X-PITA-SECRET` - the secret key associated with the account
+
 ### Endpoints
 
 A list of currently provided endpoints.

@@ -5,7 +5,8 @@ involving creating and interacting with accounts.
 @author jbowens
 """
 from flask import Blueprint, jsonify, request, g
-from mylittlepita import get_db, api_error, user_error
+from mylittlepita.errors import api_error, user_error
+from mylittlepita import get_db
 from account import Account 
 
 accounts = Blueprint('accounts', __name__)

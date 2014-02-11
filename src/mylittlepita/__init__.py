@@ -54,7 +54,6 @@ def show_frontend():
     Simple placeholder if someone tries to hit api.mylittlepita.com
     in their browser.
     """
-    get_db()
     return 'This API is for Pitas only.' 
 
 from accounts import accounts

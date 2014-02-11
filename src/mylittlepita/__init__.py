@@ -69,6 +69,8 @@ def authorize():
         g.account = Account.get(request.headers['X-PITA-ACCOUNT-ID'],
                                 request.headers['X-PITA-SECRET'])
         g.authorized = g.account != None
+    if g.authorized:
+        g.account.update_last_seen()
 
 from accounts import accounts
 app.register_blueprint(accounts, url_prefix='/accounts')

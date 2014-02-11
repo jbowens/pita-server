@@ -63,3 +63,8 @@ class Account(object):
         acc = Account(cur.fetchone()) if cur.rowcount > 0 else None
         return acc
 
+    def update_last_seen():
+        cur = get_db().cursor()
+        cur.execute('UPDATE accounts SET last_seen = now() WHERE aid = %s',
+                (self.aid,))
+

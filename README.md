@@ -12,9 +12,9 @@ custom headers to be sent with the request.
 - `X-PITA-ACCOUNT-ID` - the account id of the account to authenticate as
 - `X-PITA-SECRET` - the secret key associated with the account
 
-### Endpoints
+### HTTP Endpoints
 
-A list of currently provided endpoints.
+A list of currently provided http endpoints.
 
 #### POST /accounts/new
 

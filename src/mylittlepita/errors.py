@@ -29,6 +29,14 @@ def api_error(msg):
     log_error('bad_request', msg)
     return jsonify(user_error=False, error_message=msg), 400
 
+def access_denied():
+    """
+    Should be called when a request isn't properly authenticated for
+    the given action.
+    """
+    log_error('access_denied', request.path)
+    return jsonify(user_error=False, error_message='access denied'), 403
+
 @app.route('/error', methods=['POST'])
 def record_error_endpoint():
     """

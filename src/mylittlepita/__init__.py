@@ -33,6 +33,7 @@ def authorize():
     Check if this is an authorized request. Store the result in the global object. This
     also stores the account if it is an authorized request.
     """
+    from accounts import Account
     if 'X-PITA-ACCOUNT-ID' not in request.headers or 'X-PITA-SECRET' not in request.headers:
         g.authorized = False
         g.account = None
@@ -42,8 +43,6 @@ def authorize():
         g.authorized = g.account != None
     if g.authorized:
         g.account.update_last_seen()
-        # Get this account's Pita, while we're at it.
-        g.pita = Pita.get_by_account(g.account.aid)
 
 @app.route('/')
 def show_frontend():

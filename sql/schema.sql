@@ -15,9 +15,19 @@ CREATE TABLE IF NOT EXISTS accounts (
 );
 
 --
+-- User locations
+--
+CREATE TABLE IF NOT EXISTS locations (
+    lid         serial primary key,
+    aid         integer references accounts(aid),
+    time        timestamp default now(),
+    loc         Point not null
+);
+
+--
 -- Table for logging errors, both on the server and on the client.
 --
-CREATE TYPE error_type AS ENUM('server', 'client', 'bad_request', 'user');
+CREATE TYPE error_type AS ENUM('server', 'client', 'bad_request', 'user', 'access_denied');
 
 CREATE TABLE IF NOT EXISTS errors (
     eid         serial primary key,

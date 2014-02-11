@@ -3,8 +3,9 @@ The account model.
 
 @author jbowens
 """
-import hashlib, os
+import hashlib, os, datetime, ppygis
 from mylittlepita import get_db
+from psycopg2.extras import RealDictCursor
 
 class Account(object):
 
@@ -13,10 +14,14 @@ class Account(object):
     phone = None
     email = None
     key = None
+    created = None
+    last_seen = None
+    loc = None
+    loc_time = None
 
     def __init__(self, opts):
         for k in opts:
-            if hasattr(self, k):
+            if hasattr(self, str(k)):
                 setattr(self, k, opts[k])
 
     @staticmethod
@@ -41,9 +46,11 @@ class Account(object):
         rand_bytes = os.urandom(1000)
         h = hashlib.sha512()
         h.update(rand_bytes)
-        h.update(email)
+        if email:
+            h.update(email)
         h.update(name)
-        h.update(phone)
+        if phone:
+            h.update(phone)
         account_key = h.hexdigest()
 
         cur = get_db().cursor()
@@ -57,14 +64,21 @@ class Account(object):
 
     @staticmethod
     def get(aid, key):
-        cur = get_db().cursor()
-        cur.execute('SELECT aid FROM accounts WHERE aid = %s AND key %s',
+        cur = get_db().cursor(cursor_factory = RealDictCursor)
+        cur.execute('SELECT * FROM accounts WHERE aid = %s AND key = %s',
                     (aid, key))
-        acc = Account(cur.fetchone()) if cur.rowcount > 0 else None
+        row = cur.fetchone()
+        acc = Account(row) if cur.rowcount > 0 else None
         return acc
 
-    def update_last_seen():
+    def update_last_seen(self):
         cur = get_db().cursor()
         cur.execute('UPDATE accounts SET last_seen = now() WHERE aid = %s',
                 (self.aid,))
+
+    def update_location(self, lat, lng, when):
+        when = when if when else datetime.datetime.now()
+        cur = get_db().cursor()
+        cur.execute('UPDATE accounts SET loc=\'(%s, %s)\', loc_time = %s WHERE aid = %s',
+                (float(lat), float(lng), when, self.aid))
 

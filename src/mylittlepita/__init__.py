@@ -42,6 +42,8 @@ def authorize():
         g.authorized = g.account != None
     if g.authorized:
         g.account.update_last_seen()
+        # Get this account's Pita, while we're at it.
+        g.pita = Pita.get_by_account(g.account.aid)
 
 @app.route('/')
 def show_frontend():

@@ -4,11 +4,19 @@ involving creating and interacting with accounts.
 
 @author jbowens
 """
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, g
 from mylittlepita import get_db, api_error, user_error
 from account import Account 
 
 accounts = Blueprint('accounts', __name__)
+
+def auth():
+    if 'X-PITA-ACCOUNT-ID' not in request.headers or 'X-PITA-SECRET' not in request.headers:
+        g.account = None
+        return False
+    g.account = Account.get(request.headers['X-PITA-ACCOUNT-ID'],
+                            request.headers['X-PITA-SECRET'])
+    return g.account != None
 
 @accounts.route('/new', methods=['POST'])
 def new_account():

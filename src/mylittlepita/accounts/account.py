@@ -14,12 +14,10 @@ class Account(object):
     email = None
     key = None
 
-    def __init__(self, aid, name, phone, email, key):
-        self.aid = aid
-        self.name = name
-        self.phone = phone
-        self.email = email
-        self.key = key
+    def __init__(self, opts):
+        for k in opts:
+            if hasattr(self, k):
+                setattr(self, k, opts[k])
 
     @staticmethod
     def phone_used(phone):
@@ -53,4 +51,14 @@ class Account(object):
                     ' VALUES(%s, %s, %s, %s) RETURNING aid',
                     (name, phone, email, account_key))
         aid = cur.fetchone()[0]
-        return Account(aid, name, phone, email, account_key) if aid else None
+        d = { 'aid': aid, 'name': name, 'phone': phone, 'email': email,
+              'key': account_key }
+        return Account(d) if aid else None
+
+    @staticmethod
+    def get(aid, key):
+        cur = get_db().cursor()
+        cur.execute('SELECT aid FROM accounts WHERE aid = %s AND key %s',
+                    (aid, key))
+        return Account(cur.fetchone()) if cur.rowcount > 0 else None
+

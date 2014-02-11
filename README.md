@@ -4,10 +4,9 @@ pita-server
 The server for My Little PITA. This server does not provide
 any frontend for the website.
 
-Endpoints
-=========
+## Endpoints
 
-## POST /accounts/new
+### POST /accounts/new
 
-## POST /error
+### POST /error
 

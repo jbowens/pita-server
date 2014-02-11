@@ -39,6 +39,15 @@ def get_db():
         g.dbconn.autocommit = True
     return g.dbconn
 
+@app.teardown_appcontext
+def close_db():
+    """
+    Closes the database connection if one eixsts for this
+    context.
+    """
+    if hasattr(g, 'dbconn'):
+        g.dbconn.close()
+
 @app.route('/')
 def show_frontend():
     """

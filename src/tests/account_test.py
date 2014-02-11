@@ -44,4 +44,13 @@ class AccountsTestCase(EndpointTestCase):
         result = json.loads(rv.data)
         assert result['status'] == 'ok'
 
+    def test_access_denied(self):
+        rv = self.app.post('/accounts/location', data = {
+            'latitude': 41.8236,
+            'longitude': -71.4222
+        }, headers={
+            'X-PITA-ACCOUNT-ID': 2,
+            'X-PITA-SECRET': 'let me in plz'
+        });
+        assert '403' in rv.status
 

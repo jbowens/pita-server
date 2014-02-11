@@ -1,5 +1,5 @@
 import psycopg2
-from flask import Flask, g, jsonify
+from flask import Flask, g, jsonify, request
 
 app = Flask(__name__)
 
@@ -40,7 +40,7 @@ def get_db():
     return g.dbconn
 
 @app.teardown_appcontext
-def close_db():
+def close_db(ctx):
     """
     Closes the database connection if one eixsts for this
     context.
@@ -55,6 +55,20 @@ def show_frontend():
     in their browser.
     """
     return 'This API is for Pitas only.' 
+
+@app.before_request
+def authorize():
+    """
+    Check if this is an authorized request. Store the result in the global object. This
+    also stores the account if it is an authorized request.
+    """
+    if 'X-PITA-ACCOUNT-ID' not in request.headers or 'X-PITA-SECRET' not in request.headers:
+        g.authorized = False
+        g.account = None
+    else:
+        g.account = Account.get(request.headers['X-PITA-ACCOUNT-ID'],
+                                request.headers['X-PITA-SECRET'])
+        g.authorized = g.account != None
 
 from accounts import accounts
 app.register_blueprint(accounts, url_prefix='/accounts')

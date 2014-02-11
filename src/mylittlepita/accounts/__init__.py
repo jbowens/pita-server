@@ -10,14 +10,6 @@ from account import Account
 
 accounts = Blueprint('accounts', __name__)
 
-def auth():
-    if 'X-PITA-ACCOUNT-ID' not in request.headers or 'X-PITA-SECRET' not in request.headers:
-        g.account = None
-        return False
-    g.account = Account.get(request.headers['X-PITA-ACCOUNT-ID'],
-                            request.headers['X-PITA-SECRET'])
-    return g.account != None
-
 @accounts.route('/new', methods=['POST'])
 def new_account():
     """

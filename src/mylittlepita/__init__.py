@@ -27,14 +27,6 @@ def close_db(ctx):
     if hasattr(g, 'dbconn'):
         g.dbconn.close()
 
-@app.route('/')
-def show_frontend():
-    """
-    Simple placeholder if someone tries to hit api.mylittlepita.com
-    in their browser.
-    """
-    return 'This API is for Pitas only.' 
-
 @app.before_request
 def authorize():
     """
@@ -50,6 +42,14 @@ def authorize():
         g.authorized = g.account != None
     if g.authorized:
         g.account.update_last_seen()
+
+@app.route('/')
+def show_frontend():
+    """
+    Simple placeholder if someone tries to hit api.mylittlepita.com
+    in their browser.
+    """
+    return 'This API is for Pitas only.' 
 
 from accounts import accounts
 app.register_blueprint(accounts, url_prefix='/accounts')

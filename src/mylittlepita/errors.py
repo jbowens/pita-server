@@ -1,4 +1,15 @@
-from flask import jsonify
+from flask import jsonify, request, g
+from . import get_db, app
+
+def log_error(error_type, message):
+    """
+    Logs an error into the database.
+    """
+    account_id = g.account.aid if g.account else None
+    cur = get_db().cursor()
+    cur.execute('INSERT INTO errors (type, aid, ip, message) VALUES(%s, %s, %s, %s)',
+            (error_type, account_id, request.remote_addr, message))
+    cur.close()
 
 def user_error(msg):
     """
@@ -6,8 +17,7 @@ def user_error(msg):
     is clearly caused by the user. For example, the user provided
     a phone number that was already in use.
     """
-    # TODO: Logging still might be useful here to see how users
-    # are fucking up.
+    log_error('user', msg)
     return jsonify(user_error=True, error_message=msg), 400
 
 def api_error(msg):
@@ -16,8 +26,18 @@ def api_error(msg):
     should be used when the client is not making valid requests,
     for whatever reason.
     """
-    # TODO: Add logging of API errors. Our iOS client *should* be
-    # the only client, so this *should* be indicative of an error
-    # in our client. Could also be 1337 haxxors.
+    log_error('bad_request', msg)
     return jsonify(user_error=False, error_message=msg), 400
+
+@app.route('/error', methods=['POST'])
+def record_error_endpoint():
+    """
+    An endpoint that allows the client to report errors that occurred on
+    the client.
+    """
+    if 'message' not in request.form:
+        return errors.api_error('no error message in call to /error')
+    else:
+        log_error('client', request.form['message'])
+        return jsonify(status='ok')
 

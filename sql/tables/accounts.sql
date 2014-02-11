@@ -9,5 +9,7 @@ CREATE TABLE IF NOT EXISTS accounts (
     email       varchar(100),
     key         text,
     created     timestamp default now(),
-    last_seen   timestamp default now()
+    last_seen   timestamp default now(),
+    loc         Point default null,
+    loc_time    timestamp default null
 );

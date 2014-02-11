@@ -37,6 +37,19 @@ of the following form.
 The `aid` is the id of the created account. The `key` is a secret 128 character hash. It is used for authentication on
 any endpoints that require user authentication.
 
+#### POST /accounts/location
+
+Records an account location. This endpoint requires account authentication.
+
+- `latitude` *(required)* -- the latitude of the account's location
+- `longitude` *(required)* -- the longitude of the account's location
+- `time` -- when the account was at the given location
+
+If no `time` is provided, the current time is assumed. On success, returns 
+```json
+{"status": "ok"}
+```
+
 #### POST /error
 
 Records an error that occurred on the client. This can be used for discovering/gaining debug data

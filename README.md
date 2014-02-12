@@ -63,3 +63,13 @@ On success, the endpoint returns a JSON payload of the following form.
 {"status": "ok"}
 ```
 
+#### POST /photos/record
+
+Records a photo that was taken on the client. We can use the photos retrieved through this endpoint
+for improving our computer vision algorithm. This endpoint requires account authentication.
+
+- `photo` *(required)* -- image payload
+- `context` -- a description of the context in which the photo was taken, for ex. feeding, etc.
+
+This endpoint uses Amazon S3 for storing the image.
+

@@ -4,7 +4,7 @@ from flask import Flask, g, request
 app = Flask(__name__)
 
 app.config.from_pyfile('../../config/default.cfg')
-app.config.from_envvar('MLP_API_CONFIG_FILE', silent=True)
+app.config.from_envvar('MLP_API_CONFIG_FILE')
 
 def get_db():
     """
@@ -53,7 +53,9 @@ def show_frontend():
     return 'This API is for Pitas only.' 
 
 from accounts import accounts
+from photos import photos
 app.register_blueprint(accounts, url_prefix='/accounts')
+app.register_blueprint(photos, url_prefix='/photos')
 
 # Spawn the server
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 --
 -- Drops all the tables.
 --
+DROP TABLE IF EXISTS logged_photos CASCADE;
 DROP TABLE IF EXISTS pita_events CASCADE;
 DROP TABLE IF EXISTS errors CASCADE;
 DROP TABLE IF EXISTS locations CASCADE;

@@ -63,3 +63,16 @@ CREATE TABLE IF NOT EXISTS pita_events (
     aid             integer not null references accounts(aid),
     time            timestamp default now()
 );
+
+--
+-- Stores information about photos submitted from clients.
+--
+CREATE TABLE IF NOT EXISTS logged_photos (
+    pid             serial primary key,
+    aid             integer not null references accounts(aid),
+    time            timestamp default now(),
+    ext             text not null,
+    saved           boolean default false,
+    context         text
+);
+

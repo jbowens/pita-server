@@ -1,7 +1,7 @@
 import psycopg2
 from flask import Flask, g, request
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder='tester')
 
 app.config.from_pyfile('../../config/default.cfg')
 app.config.from_envvar('MLP_API_CONFIG_FILE')
@@ -50,7 +50,15 @@ def show_frontend():
     Simple placeholder if someone tries to hit api.mylittlepita.com
     in their browser.
     """
-    return 'This API is for Pitas only.' 
+    if app.debug:
+        # If we're in debug mode, let's serve our tester file.
+        return app.send_static_file('tester.html')
+    else:
+        return 'This API is for Pitas only.'
+
+@app.route('/tester/<path:filename>')
+def server_tester_resources():
+    return app.send_from_directory('tester', filename)
 
 from accounts import accounts
 from photos import photos

@@ -1,0 +1,108 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #333;
+  color: #FFF;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 100;
+  font-size: 4em;
+}
+
+h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  margin: 0.25em;
+  letter-spacing: 0.1em;
+  color: #DDD;
+}
+
+#container {
+  margin: 1em 10em;
+}
+
+.box {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1em;
+  color: #DDD;
+}
+
+#config-box {
+  text-align: center;
+}
+
+#config-box form {
+  margin: 2em;
+  font-size: 1.2em;
+}
+
+#config-box label {
+  margin: 0 1em;
+}
+
+#config-box input {
+  margin-left: 1em;
+  font-size: 1.2em;
+}
+
+#endpoint-container .endpoint-cont {
+  width: 50%;
+  float: left;
+}
+
+#endpoint-container .endpoint-cont:nth-child(even) .box {
+  margin: 2em 0 2em 2em;
+}
+
+#endpoint-container .endpoint-cont:nth-child(odd) .box {
+  margin: 2em 2em 2em 0;
+}
+
+.endpoint label {
+  display: block;
+  margin: 1em;
+}
+
+.endpoint label input:after {
+  clear: both;
+}
+
+.endpoint label input {
+  font-size: 1.2em;
+  float: right;
+}
+
+.endpoint input[type=submit] {
+  margin: 0 1em;
+  font-size: 1.1em;
+}
+
+.endpoint .endpoint-body {
+  float: left;
+  width: 50%;
+}
+
+.endpoint .endpoint-response {
+  width: 50%;
+  float: left;
+}
+
+.endpoint .endpoint-response .status_code {
+  font-size: 0.8em;
+}
+
+.endpoint .endpoint-response pre {
+  overflow: auto;
+  background: none;
+}
+
+pre::-webkit-scrollbar * {
+    background:transparent;
+}
+ pre::-webkit-scrollbar-thumb {
+    background:#999 !important;
+}
+
+.clear { clear: both; }

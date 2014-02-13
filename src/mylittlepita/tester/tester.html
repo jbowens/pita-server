@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Little PITA Server Tester</title>
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400' rel='stylesheet' type='text/css'>
+        <link href="tester/tester.css" rel="stylesheet" type="text/css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script type="text/javascript" src="./tester/tester.js"></script>
+    </head>
+    <body>
+        <h1>My Little PITA Tester</h1>
+        <div id="container">
+            <div id="config-box" class="box">
+                <h3>Configuration</h3> 
+                <form id="configuration">
+                    <label for="account_id">Account ID
+                    <input type="text" id="account_id" /></label>
+                    <label for="account_key">Account Key
+                    <input type="text" id="account_key" /></label>
+                </form>
+            </div>
+            <div id="endpoint-container">
+                <div class="endpoint-cont">
+                    <div class="box endpoint">
+                        <h3>POST /accounts/new</h3>
+                        <div class="endpoint-body">
+                            <form id="accounts-new" action="/accounts/new" method="POST">
+                                <label for="accounts-new-name">Name <input type="text" name="name" /></label>
+                                <label for="accounts-new-phone">Phone <input type="text" name="phone" /></label>
+                                <label for="accounts-new-email">Email <input type="Text" name="email" /></label>
+                                <input type="submit" value="Send request" class="hit-endpoint" />
+                            </form>
+                        </div>
+                        <div class="endpoint-response">
+                            <div class="status_code">
+                                Status: <span class="code">N/A</span>
+                            </div>
+                            <pre></pre>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </body>
+</html>

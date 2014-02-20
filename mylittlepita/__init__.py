@@ -3,7 +3,7 @@ from flask import Flask, g, request
 
 app = Flask(__name__,static_folder='tester')
 
-app.config.from_pyfile('../../config/default.cfg')
+app.config.from_pyfile('../config/default.cfg')
 app.config.from_envvar('MLP_API_CONFIG_FILE')
 
 def get_db():

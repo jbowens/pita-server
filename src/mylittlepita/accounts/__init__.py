@@ -24,6 +24,9 @@ def new_account():
     email = request.form['email'].strip() if 'email' in request.form else None
     phone = request.form['phone'].strip() if 'phone' in request.form else None
 
+    if phone == '':
+      phone = None
+
     if phone and Account.phone_used(phone):
         return user_error('phone number already in use')
     if email and Account.email_used(email):
@@ -45,6 +48,8 @@ def save_location():
     if not g.authorized:
         return access_denied()
     if 'latitude' not in request.form or 'longitude' not in request.form:
+        return api_error('latitude and longitude required')
+    if request.form['latitude'] == '' or request.form['longitude'] == '':
         return api_error('latitude and longitude required')
     time = request.form['time'] if 'time' in request.form else None
 

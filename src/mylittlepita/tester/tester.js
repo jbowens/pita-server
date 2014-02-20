@@ -13,8 +13,19 @@ function hit_endpoint(form) {
   $inputs.each(function() {
     if (this.name && this.name != '') {
       fields[this.name] = $(this).val();
+      $(this).val('');
     }
   });
+
+  console.log(fields);
+
+  var account_id = $('#account_id').val();
+  var account_key = $('#account_key').val();
+  var headers = {};
+  if (account_id && account_key) {
+    headers['X-PITA-ACCOUNT-ID'] = account_id;
+    headers['X-PITA-SECRET'] = account_key;
+  }
 
   var completion_handler = function(resp, http_status) {
     var endpoint_cont = $(form).closest('.endpoint');
@@ -31,12 +42,11 @@ function hit_endpoint(form) {
   $.ajax(endpoint_location, {
     type: form.method,
     data: fields,
-    complete: completion_handler
+    complete: completion_handler,
+    headers: headers
   });
   console.log('Hitting endpoint: ' + form.method.toUpperCase() + ' ' + endpoint_location);
 }
-
-
 
 $(document).ready(function(e) {
   $('.endpoint form').submit(function(e) {

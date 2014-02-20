@@ -43,8 +43,8 @@ def record_error_endpoint():
     An endpoint that allows the client to report errors that occurred on
     the client.
     """
-    if 'message' not in request.form:
-        return errors.api_error('no error message in call to /error')
+    if 'message' not in request.form or request.form['message'] == '':
+        return api_error('no error message in call to /error')
     else:
         log_error('client', request.form['message'])
         return jsonify(status='ok')

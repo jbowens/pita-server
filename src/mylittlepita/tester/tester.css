@@ -52,12 +52,16 @@ h2, h3, h4, h5, h6 {
   float: left;
 }
 
+.endpoint-cont .endpoint {
+  min-height: 300px;
+}
+
 #endpoint-container .endpoint-cont:nth-child(even) .box {
-  margin: 2em 0 2em 2em;
+  margin: 1em 0 1em 1em;
 }
 
 #endpoint-container .endpoint-cont:nth-child(odd) .box {
-  margin: 2em 2em 2em 0;
+  margin: 1em 1em 1em 0;
 }
 
 .endpoint label {

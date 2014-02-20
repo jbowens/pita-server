@@ -20,7 +20,7 @@ h2, h3, h4, h5, h6 {
 }
 
 #container {
-  margin: 1em 10em;
+  margin: 1em;
 }
 
 .box {
@@ -48,14 +48,16 @@ h2, h3, h4, h5, h6 {
 }
 
 #endpoint-container .endpoint-cont {
-  width: 50%;
+  width: 100%;
   float: left;
+  margin: 1em 0;
 }
 
 .endpoint-cont .endpoint {
   min-height: 300px;
 }
 
+/*
 #endpoint-container .endpoint-cont:nth-child(even) .box {
   margin: 1em 0 1em 1em;
 }
@@ -63,6 +65,7 @@ h2, h3, h4, h5, h6 {
 #endpoint-container .endpoint-cont:nth-child(odd) .box {
   margin: 1em 1em 1em 0;
 }
+*/
 
 .endpoint label {
   display: block;

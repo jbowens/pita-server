@@ -1,10 +1,11 @@
-import psycopg2
+import psycopg2, os
 from flask import Flask, g, request
 
 app = Flask(__name__,static_folder='tester')
 
 app.config.from_pyfile('../config/default.cfg')
-app.config.from_envvar('MLP_API_CONFIG_FILE')
+if 'MLP_API_CONFIG_FILE' in os.environ:
+    app.config.from_envvar('MLP_API_CONFIG_FILE')
 
 def get_db():
     """

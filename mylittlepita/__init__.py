@@ -63,8 +63,10 @@ def server_tester_resources():
 
 from accounts import accounts
 from photos import photos
+from pitas import pitas
 app.register_blueprint(accounts, url_prefix='/accounts')
 app.register_blueprint(photos, url_prefix='/photos')
+app.register_blueprint(pitas, url_prefix='/pitas')
 
 # Spawn the server
 if __name__ == '__main__':

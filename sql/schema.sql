@@ -48,7 +48,11 @@ CREATE TABLE IF NOT EXISTS pitas (
     aid         integer not null references accounts(aid),
     state       pita_state not null default 'egg',
     parent_a    integer references pitas(pid),
-    parent_b    integer references pitas(pid)
+    parent_b    integer references pitas(pid),
+    body_hue    float not null,
+    spots_hue   float not null,
+    tail_hue    float not null,
+    has_spots   boolean default false
 );
 
 --

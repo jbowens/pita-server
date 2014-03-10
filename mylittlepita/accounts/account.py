@@ -55,9 +55,11 @@ class Account(object):
         rand_bytes = os.urandom(1000)
         h = hashlib.sha512()
         h.update(rand_bytes)
+        h.update(uuid)
         if email:
             h.update(email)
-        h.update(name)
+        if name:
+            h.update(name)
         if phone:
             h.update(phone)
         account_key = h.hexdigest()

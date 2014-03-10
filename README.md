@@ -4,7 +4,7 @@ My Little PITA Server
 The server for My Little PITA. This server does not provide
 any frontend for the website.
 
-### Authentication
+## Authentication
 
 Some endpoints require account authentication. For these endpoints, the server expects two
 custom headers to be sent with the request.
@@ -12,11 +12,13 @@ custom headers to be sent with the request.
 - `X-PITA-ACCOUNT-ID` - the account id of the account to authenticate as
 - `X-PITA-SECRET` - the secret key associated with the account
 
-### HTTP Endpoints
+## HTTP Endpoints
 
 A list of currently provided http endpoints.
 
-#### POST /accounts/new
+### /accounts endpoints
+
+##### POST /accounts/new
 
 Creates a new account.
 
@@ -37,7 +39,7 @@ On success, the endpoint returns a JSON payload of the following form.
 The `aid` is the id of the created account. The `key` is a secret 128 character hash. It is used for authentication on
 any endpoints that require user authentication.
 
-#### POST /accounts/location
+##### POST /accounts/location
 
 Records an account location. This endpoint requires account authentication.
 
@@ -50,30 +52,9 @@ If no `time` is provided, the current time is assumed. On success, returns
 {"status": "ok"}
 ```
 
-#### POST /error
+### /pitas endpoints
 
-Records an error that occurred on the client. This can be used for discovering/gaining debug data
-about bugs on the client.
-
-- `message` *(required)* -- a message describing the error condition that occurred.
-
-On success, the endpoint returns a JSON payload of the following form.
-
-```json
-{"status": "ok"}
-```
-
-#### POST /photos/record
-
-Records a photo that was taken on the client. We can use the photos retrieved through this endpoint
-for improving our computer vision algorithm. This endpoint requires account authentication.
-
-- `photo` *(required)* -- image payload
-- `context` -- a description of the context in which the photo was taken, for ex. feeding, etc.
-
-This endpoint uses Amazon S3 for storing the image.
-
-#### POST /pitas/random
+##### POST /pitas/random
 
 Creates a random pita for the authorized account. This endpoint requires account authentication.
 No parameters are necessary. The endpoint returns a serialized Pita. Only one pita may exist for
@@ -92,4 +73,31 @@ each account.
     "has_spots": true
 }
 ```
+
+### / endpoints
+
+##### POST /error
+
+Records an error that occurred on the client. This can be used for discovering/gaining debug data
+about bugs on the client.
+
+- `message` *(required)* -- a message describing the error condition that occurred.
+
+On success, the endpoint returns a JSON payload of the following form.
+
+```json
+{"status": "ok"}
+```
+
+### /photos endpoints
+
+##### POST /photos/record
+
+Records a photo that was taken on the client. We can use the photos retrieved through this endpoint
+for improving our computer vision algorithm. This endpoint requires account authentication.
+
+- `photo` *(required)* -- image payload
+- `context` -- a description of the context in which the photo was taken, for ex. feeding, etc.
+
+This endpoint uses Amazon S3 for storing the image.
 

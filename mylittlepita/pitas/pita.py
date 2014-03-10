@@ -65,7 +65,7 @@ class Pita(object):
         cur = get_db().cursor()
         q = 'INSERT INTO pitas (aid, state, parent_a, parent_b, body_hue, ' + \
             'spots_hue, tail_hue, has_spots) ' +  \
-            'VALUES(%s, %s, %s, %s, %s, %s, %s, %s)'
+            'VALUES(%s, %s, %s, %s, %s, %s, %s, %s) RETURNING aid'
         cur.execute(q, [pita.aid,
                         pita.state,
                         pita.parent_a,
@@ -74,6 +74,10 @@ class Pita(object):
                         pita.spots_hue,
                         pita.tail_hue,
                         pita.has_spots])
+        pita.pid = cur.fetchone()[0]
+        cur.execute('INSERT INTO pita_events (pid, aid, event_type) ' + \
+                    'VALUES(%s, %s, %s)', \
+                    [pita.pid, pita.aid, 'born'])
         cur.close()
 
 

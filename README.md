@@ -41,8 +41,8 @@ any endpoints that require user authentication.
 
 Records an account location. This endpoint requires account authentication.
 
-- `latitude` *(required)* -- the latitude of the account's location
-- `longitude` *(required)* -- the longitude of the account's location
+- `latitude` *(required)* -- the latitude of the account"s location
+- `longitude` *(required)* -- the longitude of the account"s location
 - `time` -- when the account was at the given location
 
 If no `time` is provided, the current time is assumed. On success, returns 
@@ -81,14 +81,15 @@ each account.
 
 ```json
 {
-    'pid': 25525,
-    'aid': 2952,
-    'state': 'egg',
-    'parent_a': null,
-    'parent_b': null,
-    'body_hue': 2.6336,
-    'spots_hue': 0.212,
-    'tail_hue': 5.422,
-    'has_spots': true
+    "pid": 25525,
+    "aid": 2952,
+    "state": "egg",
+    "parent_a": null,
+    "parent_b": null,
+    "body_hue": 2.6336,
+    "spots_hue": 0.212,
+    "tail_hue": 5.422,
+    "has_spots": true
+}
 ```
 

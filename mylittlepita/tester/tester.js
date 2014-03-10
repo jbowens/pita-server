@@ -1,3 +1,14 @@
+function s4() {
+  return Math.floor((1 + Math.random()) * 0x10000)
+             .toString(16)
+             .substring(1);
+};
+
+function guid() {
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+         s4() + '-' + s4() + s4() + s4();
+}
+
 /*
  * Takes a form DOM object and hits the endpoint the form
  * is setup to hit.
@@ -53,4 +64,5 @@ $(document).ready(function(e) {
     e.preventDefault();
     hit_endpoint(this);
   });
+  $('#accounts-uuid').val(guid());
 });

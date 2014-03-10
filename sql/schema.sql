@@ -4,9 +4,10 @@
 --
 CREATE TABLE IF NOT EXISTS accounts (
     aid         serial primary key,
-    name        varchar(40) not null, 
-    phone       bigint,
-    email       varchar(100),
+    uuid        text not null,
+    name        varchar(40) default null,
+    phone       bigint default null,
+    email       varchar(100) default null,
     key         text,
     created     timestamp default now(),
     last_seen   timestamp default now(),

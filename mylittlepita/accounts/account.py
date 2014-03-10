@@ -10,6 +10,7 @@ from psycopg2.extras import RealDictCursor
 class Account(object):
 
     aid = None
+    uuid = None
     name = ""
     phone = None
     email = None
@@ -41,7 +42,15 @@ class Account(object):
         return used
 
     @staticmethod
-    def new(name, phone, email):
+    def uuid_used(uuid):
+        cur = get_db().cursor()
+        cur.execute('SELECT aid FROM accounts WHERE uuid = %s', (uuid,))
+        used = cur.rowcount > 0
+        cur.close()
+        return used
+
+    @staticmethod
+    def new(uuid, name, phone, email):
         # Generate a secret key that the client keeps to refer to the account.
         rand_bytes = os.urandom(1000)
         h = hashlib.sha512()
@@ -54,11 +63,11 @@ class Account(object):
         account_key = h.hexdigest()
 
         cur = get_db().cursor()
-        cur.execute('INSERT INTO accounts (name, phone, email, key) '+ 
-                    ' VALUES(%s, %s, %s, %s) RETURNING aid',
-                    (name, phone, email, account_key))
+        cur.execute('INSERT INTO accounts (uuid, name, phone, email, key) ' +
+                    ' VALUES(%s, %s, %s, %s, %s) RETURNING aid',
+                    (uuid, name, phone, email, account_key))
         aid = cur.fetchone()[0]
-        d = { 'aid': aid, 'name': name, 'phone': phone, 'email': email,
+        d = { 'aid': aid, 'uuid': uuid, 'name': name, 'phone': phone, 'email': email,
               'key': account_key }
         return Account(d) if aid else None
 

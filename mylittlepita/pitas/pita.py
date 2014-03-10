@@ -5,6 +5,8 @@ The pita model.
 """
 import math, random
 from mylittlepita import get_db
+from flask import current_app
+from psycopg2.extras import RealDictCursor
 
 def random_color():
     return random.uniform(0, 2.0 * math.pi)
@@ -31,10 +33,12 @@ class Pita(object):
         """
         Retrieves the Pita associated with the given account id, if any.
         """
-        cur = get_db().cursor()
-        cur.execute('SELECT * FROM pitas WHERE aid = %s',
+        cur = get_db().cursor(cursor_factory = RealDictCursor)
+        cur.execute('SELECT * FROM pitas WHERE aid = %s AND (state = \'alive\' OR state = \'egg\')',
                     (aid,))
-        pita = Pita(cur.fetchone()) if cur.rowcount > 0 else None
+        row = cur.fetchone()
+        current_app.logger.debug(row)
+        pita = Pita(row) if cur.rowcount > 0 else None
         return pita
 
     @staticmethod

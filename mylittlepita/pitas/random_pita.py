@@ -12,5 +12,9 @@ def random_pita():
     if not g.authorized:
         return access_denied()
 
+    existing_pita = Pita.get_by_account(g.account.aid)
+    if existing_pita:
+        return api_error('That account already has a pita.')
+
     random_pita = Pita.create_random_pita(g.account.aid)
     return jsonify(vars(random_pita))

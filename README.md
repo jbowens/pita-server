@@ -20,12 +20,12 @@ A list of currently provided http endpoints.
 
 Creates a new account.
 
-- `name` *(required)* -- the name associated with the account. It does not need to be unique.
+- `uuid` *(required)* -- device specific uuid. It must be unique.
+- `name`  -- the name associated with the account. It does not need to be unique.
 - `phone` -- the phone number associated with the account. If provided, it must be unique.
 - `email` -- the email address associated with the account. If provided, it must be unique.
 
-Either the phone number or email must be present. On success, the endpoint returns a JSON payload
-of the following form.
+On success, the endpoint returns a JSON payload of the following form.
 
 ```json
 {
@@ -72,4 +72,23 @@ for improving our computer vision algorithm. This endpoint requires account auth
 - `context` -- a description of the context in which the photo was taken, for ex. feeding, etc.
 
 This endpoint uses Amazon S3 for storing the image.
+
+#### POST /pitas/random
+
+Creates a random pita for the authorized account. This endpoint requires account authentication.
+No parameters are necessary. The endpoint returns a serialized Pita. Only one pita may exist for
+each account.
+
+```json
+{
+    'pid': 25525,
+    'aid': 2952,
+    'state': 'egg',
+    'parent_a': null,
+    'parent_b': null,
+    'body_hue': 2.6336,
+    'spots_hue': 0.212,
+    'tail_hue': 5.422,
+    'has_spots': true
+```
 

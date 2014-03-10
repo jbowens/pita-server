@@ -77,7 +77,7 @@ class Pita(object):
         pita.pid = cur.fetchone()[0]
         cur.execute('INSERT INTO pita_events (pid, aid, event_type) ' + \
                     'VALUES(%s, %s, %s)', \
-                    [pita.pid, pita.aid, 'born'])
+                    [pita.pid, pita.aid, 'conception'])
         cur.close()
 
 

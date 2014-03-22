@@ -93,3 +93,11 @@ class Account(object):
         cur.execute('UPDATE accounts SET loc=\'(%s, %s)\', loc_time = %s WHERE aid = %s',
                 (float(lat), float(lng), when, self.aid))
 
+        # Record the location in the locations table as well
+        if when:
+            cur.execute('INSERT INTO locations (aid, time, loc) VALUES(%s, %s, \'(%s, %s)\')',
+                    (self.aid, when, float(lat), float(lng)))
+        else:
+            cur.execute('INSERT INTO locations (aid, loc) VALUES(%s, \'(%s, %s)\')',
+                    (self.aid, float(lat), float(lng)))
+

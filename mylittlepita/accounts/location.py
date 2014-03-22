@@ -23,14 +23,5 @@ def save_location():
         g.account.update_location(request.form['latitude'],
                 request.form['longitude'], time)
     
-    # Record the location
-    db = get_db().cursor()
-    if time:
-        db.execute('INSERT INTO locations (aid, time, loc) VALUES(%s, %s, \'(%s, %s)\')',
-                (g.account.aid, time, float(request.form['latitude']), float(request.form['longitude'])))
-    else:
-        db.execute('INSERT INTO locations (aid, loc) VALUES(%s, \'(%s, %s)\')',
-                (g.account.aid, float(request.form['latitude']), float(request.form['longitude'])))
-    
     return jsonify(status='ok')
 

@@ -13,3 +13,4 @@ accounts = Blueprint('accounts', __name__)
 
 from location import save_location
 from new import new_account
+from nearby import nearby_accounts

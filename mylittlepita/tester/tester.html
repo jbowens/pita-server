@@ -96,7 +96,25 @@
                         <div class="clear"></div>
                     </div>
                 </div>
-
+                <div class="endpoint-cont">
+                    <div class="box endpoint">
+                        <h3>GET /accounts/nearby</h3>
+                        <div class="endpoint-body">
+                            <form id="error" action="/accounts/nearby" method="GET">
+                                <label for="accounts-location-latitude">Latitude <input type="text" name="latitude" /></label>
+                                <label for="accounts-location-longitude">Longitude <input type="text" name="longitude" /></label>
+                                <input type="submit" value="Send request" class="hit-endpoint" />
+                            </form>
+                        </div>
+                        <div class="endpoint-response">
+                            <div class="status_code">
+                                Status: <span class="code">N/A</span>
+                            </div>
+                            <pre></pre>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
             </div>
             <div class="clear"></div>
         </div>

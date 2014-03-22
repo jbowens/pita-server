@@ -14,7 +14,7 @@ def get_nearby_accounts():
     # accounts.
     return []
 
-@accounts.route('/nearby', methods=['GET'])
+@accounts.route('/nearby', methods=['POST'])
 def nearby_accounts():
     """
     Retrieves information about nearby accounts, including their

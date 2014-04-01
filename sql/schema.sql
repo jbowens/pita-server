@@ -11,7 +11,9 @@ CREATE TABLE IF NOT EXISTS accounts (
     key         text,
     created     timestamp default now(),
     last_seen   timestamp default now(),
-    loc         Point default null,
+    latitude    float,
+    longitude   float,
+    loc         geometry(POINT,4326),
     loc_time    timestamp default null
 );
 
@@ -22,7 +24,9 @@ CREATE TABLE IF NOT EXISTS locations (
     lid         serial primary key,
     aid         integer references accounts(aid),
     time        timestamp default now(),
-    loc         Point not null
+    latitude    float,
+    longitude   float,
+    loc         geometry(POINT,4326)
 );
 
 --

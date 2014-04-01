@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS accounts (
     loc_time    timestamp default null
 );
 
+CREATE INDEX idx_accounts_loc ON accounts USING GIST(loc);
+
 --
 -- User locations
 --

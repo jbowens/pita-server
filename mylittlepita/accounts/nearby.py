@@ -11,7 +11,7 @@ LOCATION_CUTOFF_TIME = datetime.timedelta(0, 0, 0, 0, 5) # 5 minutes
 
 def get_nearby_accounts():
     cur = get_db().cursor(cursor_factory = RealDictCursor)
-    cur.execute('SELECT accounts.*, ST_Distance(ST_SetSRID(ST_MakePoint(%s,%s),4326),accounts.loc) AS dist_meters FROM accounts ORDER BY accounts.loc <-> ST_SetSRID(ST_MakePoint(%s,%s),4326) LIMIT 25', (g.account.latitude, g.account.longitude, g.account.latitude, g.account.longitude))
+    cur.execute('SELECT accounts.*, ST_Distance_Sphere(ST_SetSRID(ST_MakePoint(%s,%s),4326),accounts.loc) AS dist_meters FROM accounts ORDER BY accounts.loc <-> ST_SetSRID(ST_MakePoint(%s,%s),4326) LIMIT 25', (g.account.latitude, g.account.longitude, g.account.latitude, g.account.longitude))
     accounts = cur.fetchall()
     return accounts
 
@@ -49,7 +49,7 @@ def nearby_accounts():
     for acc in nearby_accounts:
         acc_output = dict()
         acc_output['aid'] = acc['aid']
-        acc_output['dist'] = acc['dist_meters']
+        # acc_output['dist'] = acc['dist_meters']
         output.append(acc_output)
 
     current_app.logger.debug(output)

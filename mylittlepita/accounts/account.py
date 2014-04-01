@@ -90,14 +90,14 @@ class Account(object):
     def update_location(self, lat, lng, when):
         when = when if when else datetime.datetime.now()
         cur = get_db().cursor()
-        cur.execute('UPDATE accounts SET loc=\'(%s, %s)\', loc_time = %s WHERE aid = %s',
+        cur.execute('UPDATE accounts SET latitude=%s, longitude=%s, loc=ST_SetSRID(ST_MakePoint(longitude,latitude),4326), loc_time = %s WHERE aid = %s',
                 (float(lat), float(lng), when, self.aid))
 
         # Record the location in the locations table as well
         if when:
-            cur.execute('INSERT INTO locations (aid, time, loc) VALUES(%s, %s, \'(%s, %s)\')',
-                    (self.aid, when, float(lat), float(lng)))
+            cur.execute('INSERT INTO locations (aid, time, latitude, longitude, loc) VALUES(%s, %s, %s, %s, ST_SetSRID(ST_MakePoint(%s,%s),4326))',
+                    (self.aid, when, float(lat), float(lng), float(lat), float(lng)))
         else:
-            cur.execute('INSERT INTO locations (aid, loc) VALUES(%s, \'(%s, %s)\')',
-                    (self.aid, float(lat), float(lng)))
+            cur.execute('INSERT INTO locations (aid, latitude, longitude, loc) VALUES(%s, %s, %s, ST_SetSRID(ST_MakePoint(%s,%s),4326))',
+                    (self.aid, float(lat), float(lng), float(lat), float(lng)))
 

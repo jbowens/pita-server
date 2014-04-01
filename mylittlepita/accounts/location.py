@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, g
 from mylittlepita.errors import api_error, user_error, access_denied
 from mylittlepita import get_db
-from account import Account 
+from account import Account
 from mylittlepita.accounts import accounts
 
 @accounts.route('/location', methods=['POST'])
@@ -22,6 +22,6 @@ def save_location():
     if not time or not g.account.loc or time > g.account.loc_time:
         g.account.update_location(request.form['latitude'],
                 request.form['longitude'], time)
-    
+
     return jsonify(status='ok')
 

@@ -17,6 +17,8 @@ class Account(object):
     key = None
     created = None
     last_seen = None
+    latitude = None
+    longitude = None
     loc = None
     loc_time = None
 

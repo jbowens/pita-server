@@ -59,7 +59,7 @@ class Pita(object):
         })
         Pita.create_pita(pita)
         return pita
-        
+
     @staticmethod
     def create_pita(pita):
         """
@@ -69,7 +69,7 @@ class Pita(object):
         cur = get_db().cursor()
         q = 'INSERT INTO pitas (aid, state, parent_a, parent_b, body_hue, ' + \
             'spots_hue, tail_hue, has_spots) ' +  \
-            'VALUES(%s, %s, %s, %s, %s, %s, %s, %s) RETURNING aid'
+            'VALUES(%s, %s, %s, %s, %s, %s, %s, %s) RETURNING pid'
         cur.execute(q, [pita.aid,
                         pita.state,
                         pita.parent_a,

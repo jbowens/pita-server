@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS pitas (
     state       pita_state not null default 'egg',
     parent_a    integer references pitas(pid),
     parent_b    integer references pitas(pid),
+    name        text,
     body_hue    float not null,
     spots_hue   float not null,
     tail_hue    float not null,
@@ -88,3 +89,13 @@ CREATE TABLE IF NOT EXISTS logged_photos (
     context         text
 );
 
+--
+-- Stores dictionary words for generating pita names.
+--
+CREATE TYPE word_part_of_speech AS ENUM('noun', 'adjective');
+
+CREATE TABLE IF NOT EXISTS dictionary_words (
+    wid             serial primary key,
+    word            text not null,
+    pos             word_part_of_speech
+);

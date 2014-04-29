@@ -18,6 +18,7 @@ class Pita(object):
     state = None
     parent_a = None
     parent_b = None
+    name = None
     body_hue = None
     spots_hue = None
     tail_hue = None
@@ -52,6 +53,7 @@ class Pita(object):
             'state': 'egg',
             'parent_a': None,
             'parent_b': None,
+            'name': Pita.generate_name(),
             'body_hue': random_color(),
             'spots_hue': random_color(),
             'tail_hue': random_color(),
@@ -61,19 +63,35 @@ class Pita(object):
         return pita
 
     @staticmethod
+    def generate_name():
+        """
+        Generates a random pita name.
+        """
+        cur = get_db().cursor()
+        cur.execute('SELECT word FROM dictionary_words WHERE pos=\'noun\' ORDER BY random() LIMIT 1')
+        second_word = cur.fetchone()[0]
+        first_word_type = random.choice(['adjective', 'noun'])
+        cur.execute('SELECT word FROM dictionary_words WHERE pos = %s ORDER BY random() LIMIT 1', (first_word_type,))
+        first_word = cur.fetchone()[0]
+        name = first_word + ' ' + second_word
+        name = name.title()
+        return name
+
+    @staticmethod
     def create_pita(pita):
         """
         Takes a Pita object and inserts it into the database. It will
         also update tables related to Pita events.
         """
         cur = get_db().cursor()
-        q = 'INSERT INTO pitas (aid, state, parent_a, parent_b, body_hue, ' + \
+        q = 'INSERT INTO pitas (aid, state, parent_a, parent_b, name, body_hue, ' + \
             'spots_hue, tail_hue, has_spots) ' +  \
-            'VALUES(%s, %s, %s, %s, %s, %s, %s, %s) RETURNING pid'
+            'VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s) RETURNING pid'
         cur.execute(q, [pita.aid,
                         pita.state,
                         pita.parent_a,
                         pita.parent_b,
+                        pita.name,
                         pita.body_hue,
                         pita.spots_hue,
                         pita.tail_hue,

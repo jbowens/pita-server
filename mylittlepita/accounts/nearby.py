@@ -3,6 +3,7 @@ from flask import Blueprint, g, request, jsonify, current_app
 from mylittlepita.errors import api_error, user_error, access_denied
 from mylittlepita import get_db
 from mylittlepita.accounts import accounts
+from mylittlepita.pitas.pita import Pita
 from psycopg2.extras import RealDictCursor
 
 # The cutoff time at which we no longer consider a collected location
@@ -48,9 +49,12 @@ def nearby_accounts():
     output = []
     for acc in nearby_accounts:
         if acc['aid'] != g.account.aid:
+            pita = Pita.get_by_account(acc['aid'])
             acc_output = dict()
             acc_output['aid'] = acc['aid']
             # acc_output['dist'] = acc['dist_meters']
+            if pita:
+                acc_output['pita_name'] = pita.name
             output.append(acc_output)
 
     current_app.logger.debug(output)

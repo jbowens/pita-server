@@ -47,7 +47,7 @@ Records an account location. This endpoint requires account authentication.
 - `longitude` *(required)* -- the longitude of the account"s location
 - `time` -- when the account was at the given location
 
-If no `time` is provided, the current time is assumed. On success, returns 
+If no `time` is provided, the current time is assumed. On success, returns
 ```json
 {"status": "ok"}
 ```
@@ -73,6 +73,22 @@ each account.
     "has_spots": true
 }
 ```
+
+##### POST /pitas/save
+
+Saves a Pita's state attributes. This endpoint requires account authentication. It will
+update the current primary pita for the account.
+
+- `happiness` *(required)* -- the current happiness value of the pita
+- `hunger` *(required)* -- the current hunger value of the pita
+- `sleepiness` *(required)* -- the current sleepiness value of the pita
+
+A standard status json payload is sent in return:
+
+```json
+{"status": "ok"}
+```
+
 
 ### / endpoints
 

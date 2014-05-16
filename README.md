@@ -67,11 +67,14 @@ On success, the result has the following form:
 {
     "nearby_accounts": [
         {
-            "aid": 5936
+            "aid": 5936,
+            "proximity": "very close"
         },
         {
             "aid": 6036,
-            "pita_name": "Optimistic Cruelty"
+            "pid": 6087,
+            "pita_name": "Optimistic Cruelty",
+            "proximity": "close"
         }
     ]
 }

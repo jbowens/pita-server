@@ -53,8 +53,12 @@ def nearby_accounts():
             acc_output = dict()
             acc_output['aid'] = acc['aid']
             # acc_output['dist'] = acc['dist_meters']
+            acc_output['proximity'] = 'close'
+            if acc['dist_meters'] < 100:
+                acc_output['proximity'] = 'very close'
             if pita:
                 acc_output['pita_name'] = pita.name
+                acc_output['pid'] = pita.pid
             output.append(acc_output)
 
     current_app.logger.debug(output)

@@ -147,6 +147,16 @@ A standard success json payload is returned when successful.
 {"status": "ok"}
 ```
 
+##### POST /pitas/disown
+
+Records that a Pita has been disowned by its owner. This endpoint requires
+account authentication. A standard success json payload is returned when
+successful.
+
+```json
+{"status": "ok"}
+```
+
 ### / endpoints
 
 ##### POST /error

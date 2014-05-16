@@ -7,3 +7,4 @@ from save import *
 from get import *
 from hatch import *
 from death import *
+from disown import *

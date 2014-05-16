@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, g
 from mylittlepita.errors import api_error, user_error, access_denied
 from mylittlepita.pitas.pita import Pita
+from mylittlepita.pitas.event import PitaEvent
 from mylittlepita.pitas import pitas
 
 @pitas.route('/hatch', methods=['POST'])
@@ -19,4 +20,6 @@ def record_pita_hatch():
         return api_error('The pita is not in egg form.')
 
     pita.set_state('alive')
+    PitaEvent.record_event(pita, 'born')
+
     return jsonify(status='ok')

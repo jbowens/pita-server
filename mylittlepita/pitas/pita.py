@@ -32,6 +32,15 @@ class Pita(object):
             if hasattr(self, k):
                 setattr(self, k, opts[k])
 
+    def set_state(self, new_state):
+        """
+        Sets the Pita's state to be the given attribute.
+        """
+        cur = get_db().cursor()
+        cur.execute('UPDATE pitas SET state = %s WHERE pid = %s',
+                    (new_state, self.pid))
+        cur.close()
+
     def save_status(self, status):
         """
         Sets the Pita's status attributes to be the attributes given in

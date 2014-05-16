@@ -129,6 +129,15 @@ associated with the current account, the following is returned:
 
 Otherwise, a standard serialized pita is returned.
 
+##### POST /pitas/hatch
+
+Records a Pita's hatching. This endpoint requires account authentication.
+A standard success json payload is returned when successful.
+
+```json
+{"status": "ok"}
+```
+
 ### / endpoints
 
 ##### POST /error

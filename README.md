@@ -89,6 +89,17 @@ A standard status json payload is sent in return:
 {"status": "ok"}
 ```
 
+##### POST /pitas/get
+
+Retrieves a Pita. This endpoint requires account authentication. The json
+payload contains all data pertaining to the Pita. This includes static data
+like visual properties as well as state attributes. If there is no pita
+associated with the current account, the following is returned:
+
+```json
+{"status": "ok", "has_pita": false}
+```
+
 
 ### / endpoints
 

@@ -4,3 +4,4 @@ pitas = Blueprint('pitas', __name__)
 
 from random_pita import *
 from save import *
+from get import *

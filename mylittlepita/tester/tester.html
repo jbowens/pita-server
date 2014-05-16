@@ -80,7 +80,7 @@
                     <div class="box endpoint">
                         <h3>POST /pitas/save</h3>
                         <div class="endpoint-body">
-                            <form id="error" action="/pitas/save" method="POST">
+                            <form id="pitas-save" action="/pitas/save" method="POST">
                                 <label for="pita-happiness">Happiness <input type="text" name="happiness" /></label>
                                 <label for="pita-hunger">Hunger <input type="text" name="hunger" /></label>
                                 <label for="pita-sleepiness">Sleepiness <input type="text" name="sleepiness" /></label>
@@ -98,9 +98,27 @@
                 </div>
                 <div class="endpoint-cont">
                     <div class="box endpoint">
+                        <h3>POST /pitas/get</h3>
+                        <div class="endpoint-body">
+                            <form id="pitas-get" action="/pitas/get" method="POST">
+                                <input type="submit" value="Send request" class="hit-endpoint" />
+                            </form>
+                        </div>
+                        <div class="endpoint-response">
+                            <div class="status_code">
+                                Status: <span class="code">N/A</span>
+                            </div>
+                            <pre></pre>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <div class="endpoint-cont">
+                    <div class="box endpoint">
                         <h3>POST /accounts/location</h3>
                         <div class="endpoint-body">
-                            <form id="error" action="/accounts/location" method="POST">
+                            <form id="accounts-location" action="/accounts/location" method="POST">
                                 <label for="accounts-location-latitude">Latitude <input type="text" name="latitude" /></label>
                                 <label for="accounts-location-longitude">Longitude <input type="text" name="longitude" /></label>
                                 <label for="accounts-location-time">time <input type="text" name="time" /></label>
@@ -120,7 +138,7 @@
                     <div class="box endpoint">
                         <h3>POST /accounts/nearby</h3>
                         <div class="endpoint-body">
-                            <form id="error" action="/accounts/nearby" method="POST">
+                            <form id="accounts-nearby" action="/accounts/nearby" method="POST">
                                 <label for="accounts-location-latitude">Latitude <input type="text" name="latitude" /></label>
                                 <label for="accounts-location-longitude">Longitude <input type="text" name="longitude" /></label>
                                 <input type="submit" value="Send request" class="hit-endpoint" />

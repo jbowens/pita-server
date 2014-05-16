@@ -95,6 +95,7 @@ each account.
     "pid": 25525,
     "aid": 2952,
     "state": "egg",
+    "name": "Heroin Apples",
     "parent_a": null,
     "parent_b": null,
     "body_hue": 2.6336,

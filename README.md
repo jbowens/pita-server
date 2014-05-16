@@ -52,6 +52,33 @@ If no `time` is provided, the current time is assumed. On success, returns
 {"status": "ok"}
 ```
 
+##### POST /accounts/nearby
+
+Requests information about other nearby accounts. This endpoint requires
+account authentication. Optionally, the current latitude and longitude
+may be sent along with the request.
+
+- `latitude` -- the latitude of the account's current location
+- `longitude` -- the longitude of the account's current location
+
+On success, the result has the following form:
+
+```json
+{
+    "nearby_accounts": [
+        {
+            "aid": 5936
+        },
+        {
+            "aid": 6036,
+            "pita_name": "Optimistic Cruelty"
+        }
+    ]
+}
+```
+
+Accounts without a pita name do not yet have a Pita.
+
 ### /pitas endpoints
 
 ##### POST /pitas/random

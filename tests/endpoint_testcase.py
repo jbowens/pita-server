@@ -10,14 +10,15 @@ def random_phone():
 from mylittlepita import app
 
 class EndpointTestCase(unittest.TestCase):
- 
+
     def rand_account(self):
         """
         Creates a random account for testing.
         """
         rv = self.app.post('/accounts/new', data = {
             'name': 'Test Account',
-            'email': random_word(8) + '@' + random_word(10) + '.' + random_word(3)
+            'email': random_word(8) + '@' + random_word(10) + '.' + random_word(3),
+            'uuid': random_word(20)
         })
         return json.loads(rv.data)
 
@@ -26,7 +27,7 @@ class EndpointTestCase(unittest.TestCase):
         Creates a list of n random accounts.
         """
         return [self.random_account() for x in range(n)]
-   
+
     def setUp(self):
         self.app = app.test_client()
 

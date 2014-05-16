@@ -51,7 +51,6 @@ class Pita(object):
         cur.execute('SELECT * FROM pitas WHERE aid = %s AND (state = \'alive\' OR state = \'egg\')',
                     (aid,))
         row = cur.fetchone()
-        current_app.logger.debug(row)
         pita = Pita(row) if cur.rowcount > 0 else None
         return pita
 

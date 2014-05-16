@@ -6,3 +6,4 @@ from random_pita import *
 from save import *
 from get import *
 from hatch import *
+from death import *

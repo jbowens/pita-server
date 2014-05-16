@@ -138,6 +138,15 @@ A standard success json payload is returned when successful.
 {"status": "ok"}
 ```
 
+##### POST /pitas/death
+
+Records a Pita's death. This endpoint requires account authentication.
+A standard success json payload is returned when successful.
+
+```json
+{"status": "ok"}
+```
+
 ### / endpoints
 
 ##### POST /error

@@ -5,6 +5,7 @@ The pita model.
 """
 import math, random
 from mylittlepita import get_db
+from mylittlepita.pitas.event import PitaEvent
 from flask import current_app
 from psycopg2.extras import RealDictCursor
 
@@ -118,9 +119,6 @@ class Pita(object):
                         pita.tail_hue,
                         pita.has_spots])
         pita.pid = cur.fetchone()[0]
-        cur.execute('INSERT INTO pita_events (pid, aid, event_type) ' + \
-                    'VALUES(%s, %s, %s)', \
-                    [pita.pid, pita.aid, 'conception'])
         cur.close()
-
+        PitaEvent.record_event(pita, 'conception')
 

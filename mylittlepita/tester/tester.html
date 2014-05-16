@@ -78,6 +78,26 @@
                 </div>
                 <div class="endpoint-cont">
                     <div class="box endpoint">
+                        <h3>POST /pitas/save</h3>
+                        <div class="endpoint-body">
+                            <form id="error" action="/pitas/save" method="POST">
+                                <label for="pita-happiness">Happiness <input type="text" name="happiness" /></label>
+                                <label for="pita-hunger">Hunger <input type="text" name="hunger" /></label>
+                                <label for="pita-sleepiness">Sleepiness <input type="text" name="sleepiness" /></label>
+                                <input type="submit" value="Send request" class="hit-endpoint" />
+                            </form>
+                        </div>
+                        <div class="endpoint-response">
+                            <div class="status_code">
+                                Status: <span class="code">N/A</span>
+                            </div>
+                            <pre></pre>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="endpoint-cont">
+                    <div class="box endpoint">
                         <h3>POST /accounts/location</h3>
                         <div class="endpoint-body">
                             <form id="error" action="/accounts/location" method="POST">

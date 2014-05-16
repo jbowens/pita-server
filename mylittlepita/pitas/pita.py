@@ -23,11 +23,24 @@ class Pita(object):
     spots_hue = None
     tail_hue = None
     has_spots = False
+    happiness = None
+    hunger = None
+    sleepiness = None
 
     def __init__(self, opts):
         for k in opts:
             if hasattr(self, k):
                 setattr(self, k, opts[k])
+
+    def save_status(self, status):
+        """
+        Sets the Pita's status attributes to be the attributes given in
+        the passed dictionary.
+        """
+        cur = get_db().cursor()
+        cur.execute('UPDATE pitas SET happiness = %s, hunger = %s, sleepiness = %s WHERE pid = %s',
+                    (status['happiness'], status['hunger'], status['sleepiness'], self.pid))
+        cur.close()
 
     @staticmethod
     def get_by_account(aid):

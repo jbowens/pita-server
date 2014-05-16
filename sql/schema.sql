@@ -60,7 +60,10 @@ CREATE TABLE IF NOT EXISTS pitas (
     body_hue    float not null,
     spots_hue   float not null,
     tail_hue    float not null,
-    has_spots   boolean default false
+    has_spots   boolean default false,
+    happiness   float not null default 100,
+    hunger      float not null default 100,
+    sleepiness  float not null default 100
 );
 
 --

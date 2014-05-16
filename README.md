@@ -100,6 +100,7 @@ associated with the current account, the following is returned:
 {"status": "ok", "has_pita": false}
 ```
 
+Otherwise, a standard serialized pita is returned.
 
 ### / endpoints
 
